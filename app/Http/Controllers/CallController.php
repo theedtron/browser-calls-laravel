@@ -22,9 +22,9 @@ class CallController extends Controller
 //        $callerIdNumber = config('services.twilio')['number'];
         $callerIdNumber = env('TWILIO_NUMBER');
 
-        $payload = new Payload();
-        $payload->data = json_encode($callerIdNumber);
-        $payload->save();
+        Payload::create([
+            'data' => json_encode($callerIdNumber)
+        ]);
 
 
         $dial = $response->dial(['callerId' => $callerIdNumber]);
@@ -37,9 +37,9 @@ class CallController extends Controller
             $dial->client('support_agent');
         }
 
-        $payload = new Payload();
-        $payload->data = json_encode($response);
-        $payload->save();
+        Payload::create([
+            'data' => json_encode($response)
+        ]);
 
         return $response;
     }
