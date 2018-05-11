@@ -23,8 +23,8 @@ class CallController extends Controller
         ]);
 
         $response = new Twiml();
-        $callerIdNumber = config('services.twilio')['number'];
-//        $callerIdNumber = env('TWILIO_NUMBER');
+//        $callerIdNumber = config('services.twilio')['number'];
+        $callerIdNumber = env('TWILIO_NUMBER');
 
         Payload::create([
             'data' => json_encode($callerIdNumber)
