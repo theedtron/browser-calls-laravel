@@ -19,7 +19,8 @@ class CallController extends Controller
     public function newCall(Request $request)
     {
         $response = new Twiml();
-        $callerIdNumber = config('services.twilio')['number'];
+//        $callerIdNumber = config('services.twilio')['number'];
+        $callerIdNumber = env('TWILIO_NUMBER');
 
         $payload = new Payload();
         $payload->data = json_encode($callerIdNumber);
