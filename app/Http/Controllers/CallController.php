@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Payload;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,11 @@ class CallController extends Controller
         $response = new Twiml();
         $callerIdNumber = config('services.twilio')['number'];
 
+        $payload = new Payload();
+        $payload->data = json_encode($callerIdNumber);
+        $payload->save();
+
+
         $dial = $response->dial(['callerId' => $callerIdNumber]);
 
         $phoneNumberToDial = $request->input('phoneNumber');
@@ -29,6 +35,10 @@ class CallController extends Controller
         } else {
             $dial->client('support_agent');
         }
+
+        $payload = new Payload();
+        $payload->data = json_encode($response);
+        $payload->save();
 
         return $response;
     }
