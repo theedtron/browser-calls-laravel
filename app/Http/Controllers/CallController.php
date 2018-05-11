@@ -45,6 +45,6 @@ class CallController extends Controller
             'data' => json_encode($response)
         ]);
 
-        return $response;
+        return response($response);
     }
 }
