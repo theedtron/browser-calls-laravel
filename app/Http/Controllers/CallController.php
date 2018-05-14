@@ -30,7 +30,6 @@ class CallController extends Controller
             'data' => json_encode($callerIdNumber)
         ]);
 
-
         $dial = $response->dial(['callerId' => $callerIdNumber]);
 
         $phoneNumberToDial = $request->input('phoneNumber');
@@ -40,10 +39,6 @@ class CallController extends Controller
         } else {
             $dial->client('support_agent');
         }
-
-        Payload::create([
-            'data' => json_encode($response)
-        ]);
 
         return response($response);
     }

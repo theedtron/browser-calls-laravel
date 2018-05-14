@@ -44,6 +44,7 @@ Twilio.Device.connect(function (connection) {
 
     // If phoneNumber is part of the connection, this is a call from a
     // support agent to a customer's phone
+    console.log(connection.message);
     if ("phoneNumber" in connection.message) {
         updateCallStatus("In call with " + connection.message.phoneNumber);
     } else {
